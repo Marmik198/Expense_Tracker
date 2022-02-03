@@ -1,11 +1,11 @@
 <template>
   <nav>
     <v-app-bar flat app>
-      <h2 class="font-weight-light">Expence</h2>
+      <h2 class="font-weight-light">Expense</h2>
       <h2>Tracker</h2>
       <v-spacer></v-spacer>
       <v-btn @click="openModel" depressed class="blue white--text">
-        <span>Add Expence</span>
+        <span>Add Expense</span>
         <i class="fas fa-plus ml-2" right></i>
       </v-btn>
     </v-app-bar>

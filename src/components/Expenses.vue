@@ -1,43 +1,43 @@
 <template>
   <div>
-    <div class="expences">
-      <div class="balance">
-        <span>Balance</span>
-        <p>&#8377;{{ allExpences.balance }}</p>
-      </div>
-      <div class="income">
+    <v-flex class="expenses">
+      <v-card class="income rounded-xl">
         <span>Income</span>
-        <p>&#8377;{{ allExpences.income }}</p>
-      </div>
-      <div class="expence">
-        <span>Expence</span>
-        <p>&#8377;{{ allExpences.expence * -1 }}</p>
-      </div>
-    </div>
+        <p>&#8377; {{ allExpenses.income }}</p>
+      </v-card>
+      <v-card class="balance rounded-xl">
+        <span>Balance</span>
+        <p>&#8377; {{ allExpenses.balance }}</p>
+      </v-card>
+      <v-card class="expence rounded-xl">
+        <span>Expense</span>
+        <p>&#8377; {{ allExpenses.expense }}</p>
+      </v-card>
+    </v-flex>
 
     <h3 class="hist">History</h3>
 
     <div
       class="history"
-      v-for="history in allExpences.history"
+      v-for="history in allExpenses.history"
       :key="history.title"
       :class="[history.number > 0 ? 'border-green' : 'border-red']"
     >
       <div class="history__title">{{ history.title }}</div>
-      <div class="history__number">&#8377;{{ history.number }}</div>
+      <div class="history__number">&#8377; {{ history.number }}</div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Expences",
-  props: ["allExpences"],
+  name: "Expenses",
+  props: ["allExpenses"],
 };
 </script>
 
 <style scoped>
-.expences {
+.expenses {
   width: 800px;
   margin: 70px auto;
   display: flex;
@@ -59,7 +59,6 @@ export default {
 .balance span {
   position: absolute;
   top: 0;
-  /* left: 0; */
   text-align: center;
   width: 250px;
   background: orange;
@@ -84,7 +83,6 @@ export default {
 .income span {
   position: absolute;
   top: 0;
-  /* left: 0; */
   text-align: center;
   width: 250px;
   background: #42b983;
@@ -109,7 +107,6 @@ export default {
 .expence span {
   position: absolute;
   top: 0;
-  /* left: 0; */
   text-align: center;
   width: 250px;
   background: #f44336;

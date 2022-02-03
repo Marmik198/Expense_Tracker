@@ -3,9 +3,9 @@
     <div class="model" @click.self="toggle">
       <div class="model__container">
         <div class="model__form">
-          <form @submit.prevent="addExpence">
+          <v-form @submit.prevent="addExpense">
             <div class="model__group">
-              <h3 style="text-align: center">Add Expence</h3>
+              <h3 style="text-align: center">Add Expense</h3>
             </div>
             <div class="model__group">
               <input
@@ -19,14 +19,14 @@
               <input
                 type="number"
                 class="model__control"
-                placeholder="Expence"
+                placeholder="Expense"
                 v-model="number"
               />
             </div>
             <div class="model__group">
-              <input type="submit" value="Add Expence" class="button" />
+              <input type="submit" value="Add Expense" class="button" />
             </div>
-          </form>
+          </v-form>
         </div>
       </div>
     </div>
@@ -47,8 +47,8 @@ export default {
     toggle() {
       this.$emit("model-toggle");
     },
-    addExpence() {
-      this.$emit("store-expence", { title: this.title, number: this.number });
+    addExpense() {
+      this.$emit("store-expense", { title: this.title, number: this.number });
       this.title = "";
       this.number = "";
     },

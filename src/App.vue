@@ -1,60 +1,93 @@
 <template>
-  <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
+  <v-app class="white">
     <v-main>
-      <HelloWorld/>
+      <Navbar @model-show="modelToggle" />
+      <Model
+        @model-toggle="modelToggle"
+        :status="modelStatus"
+        @store-expence="storeExpence"
+      />
+      <Expences :allExpences="expences" />
     </v-main>
+    <v-footer app class="justify-center pt-4 pb-4">
+      <h3>&copy; Copyright - <a href="#">Marmik Shah</a></h3>
+      <h3><a href="#">Project Link</a></h3>
+    </v-footer>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import Navbar from "./components/Navbar";
+import Model from "./components/Model.vue";
+import Expences from "./components/Expences.vue";
 
 export default {
-  name: 'App',
-
+  name: "App",
   components: {
-    HelloWorld,
+    Navbar,
+    Model,
+    Expences,
   },
 
-  data: () => ({
-    //
-  }),
+  data() {
+    return {
+      modelStatus: false,
+      expences: {
+        balance: 0,
+        income: 0,
+        expence: 0,
+        history: [],
+      },
+    };
+  },
+
+  methods: {
+    modelToggle() {
+      this.modelStatus = !this.modelStatus;
+    },
+
+    storeExpence(payload) {
+      const number = parseInt(payload.number);
+      if (number > 1) {
+        this.expences = {
+          ...this.expences,
+          income: this.expences.income + number,
+          balance: this.expences.balance + number,
+          history: [{ title: payload.title, number }, ...this.expences.history],
+        };
+      } else if (number < 1) {
+        this.expences = {
+          ...this.expences,
+          expence: this.expences.expence + number,
+          balance: this.expences.balance + number,
+          history: [{ title: payload.title, number }, ...this.expences.history],
+        };
+      }
+      this.modelStatus = false;
+    },
+  },
 };
 </script>
+
+<style scoped>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #fafafa;
+  font-family: sans-serif;
+}
+
+.v-footer h3 a {
+  color: black;
+  text-decoration: none;
+}
+
+.v-footer h3 a:hover {
+  text-decoration: none;
+  color: #2196f3;
+}
+</style>
